@@ -1,4 +1,8 @@
-# Java Docs
+# 📚 Java Programming Documentation
+
+> **Comprehensive Java Guide** - From basics to advanced concepts
+
+---
 
 ## 1. Basic Java Program
 
@@ -227,28 +231,18 @@ class Main {
 
         sc.close();
     }
-}
-```
-
----
-
-### NB (Important Notes)
-
-* `Scanner` is a **class**, not a primitive data type
-* Java equivalent of Python:
-
   ```python
   name = input()
   ```
-* After using `nextInt()`, handle the newline before calling `nextLine()` to avoid bugs
+- After using `nextInt()`, handle the newline before calling `nextLine()` to avoid bugs
 
 ---
 
-# 7. Control Flow in Java
+## 🔀 7. Control Flow in Java
 
-## 7.1 Conditional Statements (`if`, `else if`, `else`)
+### 7.1 📝 Conditional Statements (`if`, `else if`, `else`)
 
-### Basic `if / else`
+#### 📋 Basic `if / else`
 
 ```java
 int age = 20;
@@ -260,15 +254,15 @@ if (age >= 18) {
 }
 ```
 
-### Explanation
+**📖 Explanation**
 
-* `if (age >= 18)` → checks the condition
-* If `true` → executes first block
-* If `false` → executes `else` block
+- `if (age >= 18)` → checks the condition
+- If `true` → executes first block
+- If `false` → executes `else` block
 
 ---
 
-### `else if` (Multiple conditions)
+#### 🔀 `else if` (Multiple conditions)
 
 ```java
 int score = 85;
@@ -282,43 +276,34 @@ if (score >= 90) {
 }
 ```
 
-### NB (Important Notes)
+**⚠️ NB (Important Notes)**
 
-* Conditions are evaluated **top to bottom**
-* First `true` condition is executed
-* Always use `{}` even for single statements
-
----
-
-### Comparison: Primitives vs Objects
-
-* For **primitives**: use `==`
-
-```java
-int a = 5;
-if (a == 5) { }
-```
-
-* For **objects** like `String`: use `.equals()`
-
-```java
-String name = "John";
-if (name.equals("John")) { }
-```
-
-Don’t use `==` for Strings (compares references, not value)
+- Conditions are evaluated **top to bottom**
+- First `true` condition is executed
+- Always use `{}` even for single statements
 
 ---
 
-## 7.2 Ternary Operator (`?:`)
+#### 🔄 Comparison: Primitives vs Objects
 
-### Syntax
+| Type | Comparison Method | Example |
+|------|-------------------|---------|
+| **Primitives** | `==` | `if (a == 5) { }` |
+| **Objects** | `.equals()` | `if (name.equals("John")) { }` |
+
+**❌ Don't use `==` for Strings** (compares references, not value)
+
+---
+
+### 7.2 🔀 Ternary Operator (`?:`)
+
+#### 📝 Syntax
 
 ```java
 variable = (condition) ? valueIfTrue : valueIfFalse;
 ```
 
-### Example: Simple
+#### 🎯 Example: Simple
 
 ```java
 int age = 20;
@@ -326,7 +311,7 @@ String result = (age >= 18) ? "Adult" : "Minor";
 System.out.println(result);
 ```
 
-### Step-by-step
+#### 📋 Step-by-step
 
 1. Evaluate condition → `true` or `false`
 2. If `true` → select first value
