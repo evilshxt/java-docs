@@ -1,12 +1,16 @@
 // Your first Java task will go here
 // Follow the instructions below to get started!
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Try {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
 
+        // ==================== USER INPUT WITH SCANNER ====================
         System.out.println("What is your name:: ");
         String name = input.nextLine();
 
@@ -18,33 +22,35 @@ public class Try {
         double height = input.nextDouble();
         input.nextLine(); // Consume leftover newline
 
-        System.out.printf("Name: %s\nAge: %d\nHeight: %.1f", name, age, height);
+        System.out.printf("Name: %s\nAge: %d\nHeight: %.1f\n", name, age, height);
 
+        // Age in 5 years
         int age_in_5_years = age + 5;
         System.out.printf("Age in 5 years: %d\n", age_in_5_years);
 
-        if (age<18) {
+        // Conditional logic
+        if (age < 18) {
             System.out.println("You are a minor");
         } else {
             System.out.println("You are an adult");
         }
 
-        if (height>5.5) {
-            System.out.println("Your height is above average:: ");
+        if (height > 5.5) {
+            System.out.println("Your height is above average.");
         } else {
             System.out.println("You are short asf");
         }
-        
-        // There is also something called tenary statements we can use instead of if else for just 2 options
+
+        // Ternary operator
         String status = (age >= 18) ? "adult" : "minor";
         System.out.println("You are a " + status);
 
-        // Switch statement example
+        // Switch statement
         System.out.println("Enter favorite day number (1-7 for Monday-Sunday): ");
         int dayNumber = input.nextInt();
-        input.nextLine(); // Consume leftover newline
+        input.nextLine(); // Consume newline
 
-        switch(dayNumber) {
+        switch (dayNumber) {
             case 1: System.out.println("Monday"); break;
             case 2: System.out.println("Tuesday"); break;
             case 3: System.out.println("Wednesday"); break;
@@ -55,148 +61,176 @@ public class Try {
             default: System.out.println("Invalid day number!");
         }
 
-        // String methods demonstration
+        // String methods
         System.out.println("Your name in uppercase: " + name.toUpperCase());
         System.out.println("Your name length: " + name.length());
         System.out.println("Your name contains 'a': " + name.contains("a"));
         System.out.println("Your name starts with 'E': " + name.startsWith("E"));
 
-        // ==================== ARRAYS AND LOOPS SECTION ====================
-        
-        // Create an array of colors - fixed size of 5 elements
-        String[] colors = {"Red", "Blue", "Green", "Yellow", "Purple"};
-        
-        // Traditional for loop - full control with index, condition, and increment
-        System.out.println("\n=== Traditional For Loop ===");
-        System.out.println("Available colors:");
-        for (int i = 0; i < colors.length; i++) {  // i=0, i<5, i++
-            System.out.println((i + 1) + ". " + colors[i]);  // Access element by index
+        // ==================== NUMERIC OPERATIONS & TYPE CONVERSION ====================
+        System.out.println("\n--- Numeric Types & Conversion ---");
+
+        // 🔸 Integer vs floating-point division
+        int intDiv = 5 / 2;           // Truncates → 2
+        double floatDiv = 5.0 / 2;    // → 2.5
+        System.out.println("5 / 2 (int) = " + intDiv);
+        System.out.println("5.0 / 2 (double) = " + floatDiv);
+
+        // 🔸 Casting: double → int (fractional part TRUNCATED, not rounded)
+        double original = 123.99;
+        int truncated = (int) original;
+        System.out.println("Casting " + original + " to int → " + truncated);
+
+        // ⚠️ DISCLAIMER: Unlike Python, Java is STRICTLY TYPED.
+        // You CANNOT assign a double to an int without explicit casting.
+        // Example: int x = 3.14; → COMPILER ERROR!
+        // Always use (int) or parse methods for safe conversion.
+
+        // 🔸 Increment/Decrement Operators
+        int counter = 10;
+        System.out.println("\n--- ++ and -- Operators ---");
+        System.out.println("counter = " + counter);
+        System.out.println("Post-increment (counter++): " + counter++); // prints 10, then 11
+        System.out.println("Now counter = " + counter);
+        System.out.println("Pre-decrement (--counter): " + --counter); // becomes 10, prints 10
+
+        // 🔸 Math Class Utilities
+        System.out.println("\n--- Math Functions ---");
+        double radius = 5.0;
+        double circleArea = Math.PI * Math.pow(radius, 2);
+        System.out.printf("Circle area (r=5): %.2f\n", circleArea);
+
+        System.out.println("√144 = " + Math.sqrt(144));
+        System.out.println("Random [0,1): " + Math.random());
+
+        // Round to 2 decimal places
+        double precise = 3.14159;
+        double rounded = Math.round(precise * 100.0) / 100.0;
+        System.out.println("Rounded to 2 decimals: " + rounded);
+
+        // 🔸 Character Handling
+        System.out.println("\n--- Characters & Escape Sequences ---");
+        char letter = 'A';
+        System.out.println("Character: " + letter);
+        System.out.println("Unicode value: " + (int) letter); // 65
+
+        // Escape sequences
+        System.out.println("He said: \"Java is fun!\"\n\t...and it really is.");
+
+        // ==================== PRACTICAL ASSIGNMENTS FROM SLIDES ====================
+
+        // 🔸 Time Conversion: Seconds → Minutes + Seconds
+        System.out.println("\n--- Time Conversion (Seconds → Min:Sec) ---");
+        System.out.print("Enter time in seconds: ");
+        int totalSeconds = input.nextInt();
+        input.nextLine();
+        int minutes = totalSeconds / 60;
+        int remainingSeconds = totalSeconds % 60;
+        System.out.println(totalSeconds + " seconds = " + minutes + " min " + remainingSeconds + " sec");
+
+        // 🔸 String-to-Number Parsing
+        System.out.println("\n--- String-to-Number Parsing ---");
+        System.out.print("Enter a number as text (e.g., \"42\"): ");
+        String numText = input.nextLine();
+        try {
+            int parsedInt = Integer.parseInt(numText);
+            System.out.println("Parsed integer: " + parsedInt);
+        } catch (NumberFormatException e) {
+            System.out.println("⚠️ Not a valid integer!");
         }
-        
-        // Enhanced for-loop (for-each) - simpler when you don't need index
+
+        // ==================== BUFFEREDREADER DEMONSTRATION ====================
+        System.out.println("\n--- BufferedReader Example (for large/fast input) ---");
+        System.out.print("Enter a line using BufferedReader: ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String brInput = br.readLine();
+        System.out.println("You entered (via BufferedReader): " + brInput);
+
+        // Note: To read numbers with BufferedReader, you must parse manually:
+        // int num = Integer.parseInt(br.readLine());
+
+        // Close resources
+        br.close();
+        input.close();
+
+        // ==================== ARRAYS AND LOOPS SECTION ====================
+        String[] colors = {"Red", "Blue", "Green", "Yellow", "Purple"};
+
+        System.out.println("\n=== Traditional For Loop ===");
+        for (int i = 0; i < colors.length; i++) {
+            System.out.println((i + 1) + ". " + colors[i]);
+        }
+
         System.out.println("\n=== Enhanced For-Loop ===");
-        System.out.println("Colors using for-each:");
-        for (String color : colors) {  // Automatically gets each element
+        for (String color : colors) {
             System.out.println("- " + color);
         }
-        
-        // While loop - condition only, manual increment required
+
         System.out.println("\n=== While Loop ===");
-        int count = 0;  // Initialize counter outside loop
-        System.out.println("Counting to 3:");
-        while (count < 3) {  // Only condition check
+        int count = 0;
+        while (count < 3) {
             System.out.println("Count: " + (count + 1));
-            count++;  // Manual increment - very important!
+            count++;
         }
-        
-        // Array operations and methods
+
         System.out.println("\n=== Array Operations ===");
-        System.out.println("Array length: " + colors.length);  // Get array size
-        System.out.println("First element: " + colors[0]);      // Access by index
-        System.out.println("Last element: " + colors[colors.length - 1]);  // Last element
-        colors[1] = "Light Blue";  // Modify element at index 1
+        System.out.println("Array length: " + colors.length);
+        System.out.println("First element: " + colors[0]);
+        System.out.println("Last element: " + colors[colors.length - 1]);
+        colors[1] = "Light Blue";
         System.out.println("Modified second element: " + colors[1]);
-        
-        // Nested loops - loop inside another loop
-        // IMPORTANT: Inner loop finishes COMPLETELY before outer loop increments again
+
         System.out.println("\n=== Nested Loops ===");
-        System.out.println("Multiplication table 2x2:");
-        System.out.println("Execution order will be:");
-        System.out.println("i=1 → j=1, j=2 → i=2 → j=1, j=2");
-        
-        for (int i = 1; i <= 2; i++) {        // Outer loop: controls rows
-            for (int j = 1; j <= 2; j++) {    // Inner loop: controls columns
+        for (int i = 1; i <= 2; i++) {
+            for (int j = 1; j <= 2; j++) {
                 System.out.println(i + " x " + j + " = " + (i * j));
             }
-            // Inner loop completely finishes here, then outer loop increments
         }
-        
-        /*
-        EXECUTION TREE (what actually happens):
-        
-        i = 1 (outer loop starts)
-        ├── j = 1 (inner loop) → prints "1 x 1 = 1"
-        ├── j = 2 (inner loop) → prints "1 x 2 = 2"
-        └── inner loop FINISHED, outer loop increments i to 2
-        
-        i = 2 (outer loop continues)
-        ├── j = 1 (inner loop RESETS) → prints "2 x 1 = 2"
-        ├── j = 2 (inner loop) → prints "2 x 2 = 4"
-        └── inner loop FINISHED, outer loop increments i to 3 (stops)
-        
-        Total: 4 prints, not just "2 x 2 = 4"!
-        */
-        
-        // Break and continue in loops
+
         System.out.println("\n=== Break and Continue ===");
-        System.out.println("Numbers 1-10 (skip 5, stop at 8):");
         for (int i = 1; i <= 10; i++) {
-            if (i == 5) {
-                continue;  // Skip this iteration
-            }
-            if (i == 8) {
-                break;     // Exit loop completely
-            }
+            if (i == 5) continue;
+            if (i == 8) break;
             System.out.println("Number: " + i);
         }
 
         // ==================== METHODS SECTION ====================
-        
-        // Call our custom methods
         System.out.println("\n=== Methods Demonstration ===");
-        
-        // Call void method (no return value)
         printWelcome(name);
-        
-        // Call method with return value
         int sum = addNumbers(age, 5);
         System.out.println("Your age + 5 = " + sum);
-        
-        // Call boolean method
         System.out.println("Is your age even? " + isEven(age));
-        
-        // Call overloaded methods
         System.out.println(greet(name));
         System.out.println(greet(name, "Mr./Ms."));
-        
-        // Call method with array
-        System.out.println("\nFirst color in array: " + getFirstColor(colors));
-
-        input.close();
+        System.out.println("First color: " + getFirstColor(colors));
     }
-    
+
     // ==================== CUSTOM METHODS ====================
-    
-    // Static method - no object needed, just prints welcome message
     public static void printWelcome(String name) {
         System.out.println("🎉 Welcome to Java Learning, " + name + "!");
     }
-    
-    // Static method with return value - adds two numbers and returns result
+
     public static int addNumbers(int a, int b) {
-        return a + b;  // Return the sum
+        return a + b;
     }
-    
-    // Static method with boolean return - checks if number is even
+
     public static boolean isEven(int number) {
-        return number % 2 == 0;  // Return true if even, false if odd
+        return number % 2 == 0;
     }
-    
-    // Method overloading - same name, different parameters
+
     public static String greet(String name) {
         return "Hello, " + name;
     }
-    
+
     public static String greet(String name, String title) {
         return "Hello, " + title + " " + name;
     }
-    
-    // Method that works with arrays
+
     public static String getFirstColor(String[] colorArray) {
         if (colorArray.length > 0) {
-            return colorArray[0];  // Return first element
+            return colorArray[0];
         } else {
-            return "No colors available";  // Return message if array is empty
+            return "No colors available";
         }
     }
 }
