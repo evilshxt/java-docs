@@ -231,10 +231,8 @@ class Main {
 
         sc.close();
     }
-  ```python
-  name = input()
-  ```
-- After using `nextInt()`, handle the newline before calling `nextLine()` to avoid bugs
+}
+```
 
 ---
 
@@ -367,205 +365,234 @@ System.out.println("Grade: " + grade);
 
 ---
 
-8. Primitive vs Non-Primitive (Object) Types
-8.1 Primitive Types
-Examples
+## 8. Primitive vs Non-Primitive (Object) Types
 
+### 8.1 Primitive Types
+
+**Examples:**
+```java
 int, long, float, double, char, boolean
 
 int a = 5;
 boolean isActive = true;
 double pi = 3.14159;
+```
 
-Key Points
+**Key Points:**
+- Store actual values
+- Comparison: use `==`
+- Cannot use methods like `.equals()`, `.isEmpty()`, `.length()`
+- Fast and memory-efficient
 
-Store actual values
-
-Comparison: use ==
-
-Cannot use methods like .equals(), .isEmpty(), .length()
-
-Fast and memory-efficient
-
-Example: Comparison
+**Example: Comparison**
+```java
 int x = 10;
 int y = 10;
 
-if (x == y) {  // ✅ Correct
+if (x == y) {  // Correct
     System.out.println("x and y are equal");
 }
+```
 
+> **NB:** No `.equals()` for primitives — this will give a compile-time error.
 
-NB: No .equals() for primitives — this will give a compile-time error.
+---
 
-8.2 Non-Primitive Types (Objects)
-Examples
+### 8.2 Non-Primitive Types (Objects)
 
+**Examples:**
+```java
 String, Scanner, ArrayList, custom classes
 
 String name1 = "John";
 String name2 = "John";
+```
 
-Key Points
+**Key Points:**
+- Store references to objects
+- Comparison: use `.equals()` to check content/value
+- Can use object methods like `.isEmpty()`, `.length()`, `.contains()`, `.charAt()`
 
-Store references to objects
-
-Comparison: use .equals() to check content/value
-
-Can use object methods like .isEmpty(), .length(), .contains(), .charAt()
-
-Example: String Comparison
-if (name1.equals(name2)) {  // ✅ Correct
+**Example: String Comparison**
+```java
+if (name1.equals(name2)) {  // Correct
     System.out.println("Names are equal");
 }
 
-if (name1 == name2) {  // ❌ Only true if both references point to same object
+if (name1 == name2) {  // Only true if both references point to same object
     System.out.println("References are equal");
 }
+```
 
-String Methods
-Method	Example	Description
-.equals()	str1.equals(str2)	Compare string content
-.equalsIgnoreCase()	str1.equalsIgnoreCase(str2)	Compare ignoring case
-.isEmpty()	str.isEmpty()	True if string length is 0
-.length()	str.length()	Returns number of characters
-.charAt()	str.charAt(0)	Character at index
-.contains()	str.contains("abc")	Checks if substring exists
-.startsWith() / .endsWith()	str.startsWith("Hi")	Check prefix/suffix
-8.3 Quick NB (Beginner Survival)
+**String Methods**
+| Method | Example | Description |
+|--------|---------|-------------|
+| `.equals()` | `str1.equals(str2)` | Compare string content |
+| `.equalsIgnoreCase()` | `str1.equalsIgnoreCase(str2)` | Compare ignoring case |
+| `.isEmpty()` | `str.isEmpty()` | True if string length is 0 |
+| `.length()` | `str.length()` | Returns number of characters |
+| `.charAt()` | `str.charAt(0)` | Character at index |
+| `.contains()` | `str.contains("abc")` | Checks if substring exists |
+| `.startsWith()` / `.endsWith()` | `str.startsWith("Hi")` | Check prefix/suffix |
 
-Primitives: int, boolean, double → only == comparisons, no methods
+---
 
-Objects (Non-Primitives): String, Scanner, ArrayList → use .equals(), .isEmpty(), etc.
+### 8.3 Quick NB (Beginner Survival)
 
-Strings: always use .equals() for value comparison, == only for reference comparison
+- **Primitives:** `int`, `boolean`, `double` → only `==` comparisons, no methods
+- **Objects (Non-Primitives):** `String`, `Scanner`, `ArrayList` → use `.equals()`, `.isEmpty()`, etc.
+- **Strings:** always use `.equals()` for value comparison, `==` only for reference comparison
 
-8.4 Example Combining Both
+---
+
+### 8.4 Example Combining Both
+
+```java
 int a = 10;
 int b = 10;
 
 String str1 = "Hello";
 String str2 = new String("Hello");
 
-if (a == b) {  // ✅ compares values
+if (a == b) {  // compares values
     System.out.println("a and b are equal");
 }
 
-if (str1.equals(str2)) {  // ✅ compares string content
+if (str1.equals(str2)) {  // compares string content
     System.out.println("str1 and str2 content is equal");
 }
 
-if (str1 == str2) {  // ❌ compares references
+if (str1 == str2) {  // compares references
     System.out.println("This will NOT print");
 }
+```
 
+> **NB:** Always remember — primitives store values, objects store references.
 
-NB: Always remember — primitives store values, objects store references.
+---
 
-Loops in Java
+## 9. Loops in Java
 
 Loops are used to repeat a block of code multiple times.
 
-9.1 for Loop
-Syntax
+### 9.1 `for` Loop
+
+**Syntax:**
+```java
 for (initialization; condition; update) {
     // code to execute
 }
+```
 
-Example
+**Example:**
+```java
 for (int i = 1; i <= 5; i++) {
     System.out.println("Count: " + i);
 }
+```
 
-Explanation
+**Explanation:**
+- **Initialization:** `int i = 1` → sets starting value
+- **Condition:** `i <= 5` → loop continues while true
+- **Update:** `i++` → increments i after each iteration
+- **Body:** prints the current value of i
 
-Initialization: int i = 1 → sets starting value
+> **NB:** All three parts (initialization, condition, update) are optional, but usually included.
 
-Condition: i <= 5 → loop continues while true
+---
 
-Update: i++ → increments i after each iteration
+### 9.2 Enhanced `for` Loop (for-each)
 
-Body: prints the current value of i
-
-NB: All three parts (initialization, condition, update) are optional, but usually included.
-
-9.2 Enhanced for Loop (for-each)
-Syntax
+**Syntax:**
+```java
 for (datatype variable : collection) {
     // code to execute
 }
+```
 
-Example
+**Example:**
+```java
 String[] fruits = {"Apple", "Banana", "Cherry"};
 
 for (String fruit : fruits) {
     System.out.println(fruit);
 }
+```
 
-Explanation
+**Explanation:**
+- Loops through all elements in an array or collection
+- Variable `fruit` takes the value of each element in order
 
-Loops through all elements in an array or collection
+> **NB:** Cannot modify the collection while using an enhanced for loop.
 
-Variable fruit takes the value of each element in order
+---
 
-NB: Cannot modify the collection while using an enhanced for loop.
+### 9.3 `while` Loop
 
-9.3 while Loop
-Syntax
+**Syntax:**
+```java
 while (condition) {
     // code to execute
 }
+```
 
-Example
+**Example:**
+```java
 int i = 1;
 while (i <= 5) {
     System.out.println("Count: " + i);
     i++;
 }
+```
 
-Explanation
+**Explanation:**
+- Checks condition before each iteration
+- Executes the body only if condition is true
+- Remember to update variables inside the loop to avoid infinite loops
 
-Checks condition before each iteration
+---
 
-Executes the body only if condition is true
+### 9.4 `do-while` Loop
 
-Remember to update variables inside the loop to avoid infinite loops
-
-9.4 do-while Loop
-Syntax
+**Syntax:**
+```java
 do {
     // code to execute
 } while (condition);
+```
 
-Example
+**Example:**
+```java
 int i = 1;
 do {
     System.out.println("Count: " + i);
     i++;
 } while (i <= 5);
+```
 
-Explanation
+**Explanation:**
+- Executes the body at least once, even if condition is false
+- Condition is checked after execution
 
-Executes the body at least once, even if condition is false
+---
 
-Condition is checked after execution
+### 9.5 NB (Beginner Notes)
 
-9.5 NB (Beginner Notes)
+- **Infinite loops** occur if the condition never becomes false:
+  ```java
+  while(true) { }
+  ```
+- Use `break;` to exit a loop early
+- Use `continue;` to skip the current iteration
 
-Infinite loops occur if the condition never becomes false
-
-while(true) { }
-
-
-Use break; to exit a loop early
-
-Use continue; to skip the current iteration
-
-10. Switch Statements in Java
+---
+## 10. Switch Statements in Java
 
 Switch statements are an alternative to long if-else chains when comparing a single variable against multiple values.
 
-10.1 Basic Syntax
+### 10.1 Basic Syntax
+
+```java
 switch (variable) {
     case value1:
         // code
@@ -576,8 +603,11 @@ switch (variable) {
     default:
         // code
 }
+```
 
-Example
+#### Example
+
+```java
 int day = 3;
 String dayName;
 
@@ -596,18 +626,18 @@ switch (day) {
 }
 
 System.out.println("Day: " + dayName);
+```
 
-Explanation
+#### Explanation
 
-switch(variable) → evaluates the variable
+- `switch(variable)` → evaluates the variable
+- `case value:` → checks for match
+- `break;` → exits the switch block (prevents "fall-through")
+- `default:` → executed if no cases match
 
-case value: → checks for match
+### 10.2 Switch with Strings
 
-break; → exits the switch block (prevents "fall-through")
-
-default: → executed if no cases match
-
-10.2 Switch with Strings
+```java
 String fruit = "Apple";
 
 switch (fruit) {
@@ -620,41 +650,41 @@ switch (fruit) {
     default:
         System.out.println("Unknown fruit");
 }
+```
 
+> **NB:** Switch can work with `int`, `byte`, `short`, `char`, `String`, and `enum` types in Java.
 
-NB: Switch can work with int, byte, short, char, String, and enum types in Java.
+### 10.3 NB (Beginner Notes)
 
-10.3 NB (Beginner Notes)
-
-Always include break; unless you want fall-through behavior
-
-default: is optional but recommended
-
-Avoid using switch for complex conditions; if-else may be clearer
+- Always include `break;` unless you want fall-through behavior
+- `default:` is optional but recommended
+- Avoid using switch for complex conditions; if-else may be clearer
 
 ---
 
-11. Methods in Java
+## 11. Methods in Java
 
 Methods are blocks of code that perform a specific task. They help you reuse code, organize logic, and make programs easier to read.
 
-11.1 Basic Syntax
+### 11.1 Basic Syntax
+
+```java
 returnType methodName(parameters) {
     // code to execute
     return value; // if returnType is not void
 }
+```
 
-Explanation
+#### Explanation
 
-returnType → data type the method returns (int, String, void if nothing is returned)
+- `returnType` → data type the method returns (`int`, `String`, `void` if nothing is returned)
+- `methodName` → name of the method (follow naming conventions, e.g., `calculateSum`)
+- `parameters` → values passed to the method (optional)
+- `return` → returns a value (optional if `void`)
 
-methodName → name of the method (follow naming conventions, e.g., calculateSum)
+### 11.2 Example: Simple Method
 
-parameters → values passed to the method (optional)
-
-return → returns a value (optional if void)
-
-11.2 Example: Simple Method
+```java
 class Main {
     // Method that adds two numbers
     static int add(int a, int b) {
@@ -666,20 +696,20 @@ class Main {
         System.out.println("Sum: " + sum);
     }
 }
+```
 
-Explanation
+#### Explanation
 
-static int add(int a, int b) → defines a method called add that returns an int
+- `static int add(int a, int b)` → defines a method called `add` that returns an `int`
+- `return a + b;` → sends the sum back to where the method was called
+- `int sum = add(5, 3);` → calls the method with values 5 and 3
+- `System.out.println` → prints the result
 
-return a + b; → sends the sum back to where the method was called
+> **NB:** Using `static` means you can call the method without creating an object.
 
-int sum = add(5, 3); → calls the method with values 5 and 3
+### 11.3 Methods with `void` (no return)
 
-System.out.println → prints the result
-
-NB: Using static means you can call the method without creating an object.
-
-11.3 Methods with void (no return)
+```java
 class Main {
     static void greet(String name) {
         System.out.println("Hello " + name);
@@ -689,13 +719,14 @@ class Main {
         greet("John");
     }
 }
+```
 
+- `void` → the method does not return any value
+- Can still perform actions (printing, calculations, modifying objects)
 
-void → the method does not return any value
+### 11.4 Instance Methods (non-static)
 
-Can still perform actions (printing, calculations, modifying objects)
-
-11.4 Instance Methods (non-static)
+```java
 class Person {
     String name;
 
@@ -712,14 +743,16 @@ class Main {
         p.sayHello();
     }
 }
+```
 
-Explanation
+#### Explanation
 
-sayHello() is an instance method, so you need to create an object to call it (p.sayHello())
+- `sayHello()` is an instance method, so you need to create an object to call it (`p.sayHello()`)
+- Instance methods can access instance variables (`name`)
 
-Instance methods can access instance variables (name)
+### 11.5 Methods with Multiple Parameters
 
-11.5 Methods with Multiple Parameters
+```java
 static String fullName(String firstName, String lastName) {
     return firstName + " " + lastName;
 }
@@ -728,11 +761,13 @@ public static void main(String[] args) {
     String name = fullName("John", "Doe");
     System.out.println(name);
 }
+```
 
+> **NB:** The number of arguments must match the number of parameters in the method definition.
 
-NB: The number of arguments must match the number of parameters in the method definition.
+### 11.6 Method Overloading (Same method name, different parameters)
 
-11.6 Method Overloading (Same method name, different parameters)
+```java
 static int multiply(int a, int b) {
     return a * b;
 }
@@ -745,87 +780,79 @@ public static void main(String[] args) {
     System.out.println(multiply(2, 3));     // Calls int version
     System.out.println(multiply(2.5, 3.5)); // Calls double version
 }
+```
 
-Explanation
+### 11.7 NB (Beginner Notes)
 
-Java chooses the correct method based on parameter types
+- **Static methods** → belong to the class, no object needed
+- **Instance methods** → belong to objects, require object creation
+- **Return type** → must match the type of value you return
+- **Parameters** → can pass multiple values, but types and order matter
+- Method calls can be nested inside other methods
 
-Makes your code more readable and reusable
+---
 
-11.7 NB (Beginner Notes)
+### ✅ Summary
 
-Static methods → belong to the class, no object needed
+- Methods organize code into reusable blocks
+- Can have parameters and return values
+- Use `static` for class-level methods, instance methods for objects
+- Method overloading allows multiple methods with the same name but different parameters
 
-Instance methods → belong to objects, require object creation
+---
 
-Return type → must match the type of value you return
-
-Parameters → can pass multiple values, but types and order matter
-
-Method calls can be nested inside other methods
-
-✅ Summary
-
-Methods organize code into reusable blocks
-
-Can have parameters and return values
-
-Use static for class-level methods, instance methods for objects
-
-Method overloading allows multiple methods with the same name but different parameters
-
--- 
-
-12. Arrays and Collections in Java
+## 12. Arrays and Collections in Java
 
 Java uses arrays and collections to store multiple values in a single variable.
 
-12.1 Arrays
-What is an Array?
+### 12.1 Arrays
 
-Fixed-size container for elements of the same type
+**What is an Array?**
+- Fixed-size container for elements of the same type
+- Index starts at 0
+- Can store primitives or objects
 
-Index starts at 0
+#### 12.1.1 Syntax & Declaration
 
-Can store primitives or objects
-
-12.1.1 Syntax & Declaration
+```java
 int[] numbers;          // declare
 numbers = new int[5];   // allocate memory for 5 elements
 
-
-Or in one line:
-
+// Or in one line:
 int[] numbers = new int[5];
 
-
-Or initialize directly:
-
+// Or initialize directly:
 int[] numbers = {1, 2, 3, 4, 5};
+```
 
-12.1.2 Accessing Array Elements
+#### 12.1.2 Accessing Array Elements
+
+```java
 System.out.println(numbers[0]);  // prints first element
 numbers[2] = 10;                 // change third element
+```
 
+> **NB:** Accessing an invalid index (e.g., `numbers[5]`) will throw `ArrayIndexOutOfBoundsException`.
 
-NB: Accessing an invalid index (e.g., numbers[5]) will throw ArrayIndexOutOfBoundsException.
+#### 12.1.3 Iterating Over Arrays
 
-12.1.3 Iterating Over Arrays
-
-Using for loop:
-
+**Using for loop:**
+```java
 for (int i = 0; i < numbers.length; i++) {
     System.out.println(numbers[i]);
 }
+```
 
-
-Using enhanced for loop (for-each):
-
+**Using enhanced for loop (for-each):**
+```java
 for (int num : numbers) {
     System.out.println(num);
 }
+```
 
-12.1.4 Multi-dimensional Arrays
+#### 12.1.4 Multi-dimensional Arrays
+
+```java
 int[][] matrix = {
     {1, 2, 3},
     {4, 5, 6},
@@ -833,24 +860,29 @@ int[][] matrix = {
 };
 
 System.out.println(matrix[1][2]); // prints 6
+```
 
+> **NB:** Arrays are fixed-size. To "resize," you need Collections.
 
-NB: Arrays are fixed-size. To "resize," you need Collections.
+---
 
-12.2 Collections (List / ArrayList)
-What is a Collection?
+### 12.2 Collections (List / ArrayList)
 
-Dynamic-size container
+**What is a Collection?**
+- Dynamic-size container
+- Can add, remove, or modify elements
+- Part of `java.util` package
 
-Can add, remove, or modify elements
+#### 12.2.1 Importing Collection Classes
 
-Part of java.util package
-
-12.2.1 Importing Collection Classes
+```java
 import java.util.ArrayList;
 import java.util.List;
+```
 
-12.2.2 ArrayList Example
+#### 12.2.2 ArrayList Example
+
+```java
 ArrayList<String> fruits = new ArrayList<>();
 
 fruits.add("Apple");
@@ -858,54 +890,69 @@ fruits.add("Banana");
 fruits.add("Cherry");
 
 System.out.println(fruits); // [Apple, Banana, Cherry]
+```
 
-12.2.3 Accessing Elements
+#### 12.2.3 Accessing Elements
+
+```java
 System.out.println(fruits.get(0));  // Apple
 fruits.set(1, "Blueberry");         // Replace Banana with Blueberry
 fruits.remove(2);                    // Remove Cherry
+```
 
-12.2.4 Iterating Over ArrayList
+#### 12.2.4 Iterating Over ArrayList
 
-Using for-each loop:
-
+**Using for-each loop:**
+```java
 for (String fruit : fruits) {
     System.out.println(fruit);
 }
+```
 
-
-Using standard for loop:
-
+**Using standard for loop:**
+```java
 for (int i = 0; i < fruits.size(); i++) {
     System.out.println(fruits.get(i));
 }
+```
 
-12.2.5 List Interface
+#### 12.2.5 List Interface
+
+```java
 List<String> colors = new ArrayList<>();
 colors.add("Red");
 colors.add("Green");
 colors.add("Blue");
+```
 
+> **NB:** `ArrayList` is one implementation of the `List` interface. Other types exist (`LinkedList`, `Vector`), but `ArrayList` is most commonly used.
 
-NB: ArrayList is one implementation of the List interface. Other types exist (LinkedList, Vector), but ArrayList is most commonly used.
+---
 
-12.3 Arrays vs ArrayList (Quick Comparison)
-Feature	Array	ArrayList
-Size	Fixed	Dynamic
-Can store	Primitives or objects	Objects only
-Access	array[index]	list.get(index)
-Add/Remove	No	Yes (add, remove)
-Iteration	for or for-each	for, for-each, iterator
-12.4 NB (Beginner Notes)
+### 12.3 Arrays vs ArrayList (Quick Comparison)
 
-Arrays are faster but less flexible
+| Feature | Array | ArrayList |
+|---------|--------|-----------|
+| **Size** | Fixed | Dynamic |
+| **Can store** | Primitives or objects | Objects only |
+| **Access** | `array[index]` | `list.get(index)` |
+| **Add/Remove** | No | Yes (add, remove) |
+| **Iteration** | for or for-each | for, for-each, iterator |
 
-ArrayLists are dynamic but store objects only (wrap primitives with Integer, Double, etc.)
+---
 
-Java does not have tuples; small fixed groups of values can be stored in arrays, ArrayList, or custom classes/records
+### 12.4 NB (Beginner Notes)
 
-Looping over arrays/ArrayLists works with for, while, and enhanced for
+- Arrays are faster but less flexible
+- ArrayLists are dynamic but store objects only (wrap primitives with `Integer`, `Double`, etc.)
+- Java does not have tuples; small fixed groups of values can be stored in arrays, ArrayList, or custom classes/records
+- Looping over arrays/ArrayLists works with `for`, `while`, and enhanced for
 
-12.5 Example Combining Loops and ArrayList
+---
+
+### 12.5 Example Combining Loops and ArrayList
+
+```java
 import java.util.ArrayList;
 
 class Main {
@@ -926,24 +973,442 @@ class Main {
         System.out.println("Updated list: " + students);
     }
 }
+```
 
-
-Output:
-
+**Output:**
+```
 Hello Alice
 Hello Bob
 Hello Charlie
 Updated list: [Alice, Charlie]
+```
 
-✅ Summary
+---
 
-Arrays: fixed-size, typed, indexed
+### ✅ Summary
 
-ArrayLists / Collections: dynamic-size, flexible, object-based
+- **Arrays:** fixed-size, typed, indexed
+- **ArrayLists / Collections:** dynamic-size, flexible, object-based
+- **Loops + Collections:** essential for iterating and modifying lists
+- **No tuples:** use arrays, ArrayLists, or small classes/records for grouped data
 
-Loops + Collections: essential for iterating and modifying lists
+---
 
-No tuples: use arrays, ArrayLists, or small classes/records for grouped data
+## 13. Type Casting in Java
+
+Type casting is converting one data type to another. Java supports two types of casting: primitive casting and String parsing.
+
+### 13.1 Primitive Type Casting
+
+#### Widening Casting (Automatic)
+Smaller type → Larger type (no data loss)
+
+```java
+int age = 46;
+double newAge = age;  // Automatic: int to double
+```
+
+#### Narrowing Casting (Manual)
+Larger type → Smaller type (possible data loss)
+
+```java
+double height = 5.879;
+int newHeight = (int)height;  // Manual: double to int
+```
+
+**⚠️ NB**: Narrowing casting truncates decimals (doesn't round)
+
+### 13.2 String to Primitive Conversion
+
+Use wrapper class methods:
+
+```java
+String weight = "89";
+String distance = "23.4657";
+
+int intWeight = Integer.parseInt(weight);
+double doubleDistance = Double.parseDouble(distance);
+```
+
+### 13.3 Complete Example
+
+```java
+public class TypeCasting {
+    public static void main(String[] args) {
+        int age = 46;
+        double height = 5.879;
+        String weight = "89";
+        String distance = "23.4657";
+
+        // Primitive casting
+        double newAge = (double)age;
+        int newHeight = (int)height;
+
+        // String parsing
+        int intWeight = Integer.parseInt(weight);
+        double doubleDistance = Double.parseDouble(distance);
+
+        System.out.printf("Original age (int): %d -> Converted to double: %.1f\n", age, newAge);
+        System.out.printf("Original height (double): %.3f -> Converted to int: %d\n", height, newHeight);
+        System.out.printf("Original weight (String): \"%s\" -> Converted to int: %d\n", weight, intWeight);
+        System.out.printf("Original distance (String): \"%s\" -> Converted to double: %.4f\n", distance, doubleDistance);
+    }
+}
+```
+
+### 13.4 Common Casting Scenarios
+
+#### Arithmetic Operations
+```java
+int result = 5 / 2;        // Result: 2 (integer division)
+double result = 5.0 / 2;   // Result: 2.5 (double division)
+```
+
+#### User Input Conversion
+```java
+Scanner input = new Scanner(System.in);
+String userInput = input.nextLine();
+int number = Integer.parseInt(userInput);
+```
+
+### 13.5 NB (Beginner Notes)
+
+- **Widening**: Automatic, safe (int → double)
+- **Narrowing**: Manual, potential data loss (double → int)
+- **String parsing**: Use `Integer.parseInt()`, `Double.parseDouble()`
+- **Error handling**: String parsing throws `NumberFormatException` for invalid input
+
+---
+
+## 14. Math Functions in Java
+
+Java's `Math` class provides comprehensive mathematical functions and constants.
+
+### 14.1 Math Constants
+
+```java
+System.out.println(Math.PI);   // 3.141592653589793
+System.out.println(Math.E);    // 2.718281828459045
+```
+
+### 14.2 Trigonometric Functions
+
+```java
+// Convert degrees to radians first
+double angle = 90;
+double radians = Math.toRadians(angle);
+
+System.out.println(Math.sin(radians));    // 1.0
+System.out.println(Math.cos(radians));    // 0.0
+System.out.println(Math.tan(Math.toRadians(45))); // 1.0
+
+// Inverse functions
+System.out.println(Math.asin(1.0));        // π/2
+System.out.println(Math.acos(0.0));        // π/2
+System.out.println(Math.atan(1.0));        // π/4
+
+// Convert back to degrees
+System.out.println(Math.toDegrees(Math.PI/2)); // 90.0
+```
+
+### 14.3 Exponential and Logarithmic Functions
+
+```java
+// Exponential
+System.out.println(Math.exp(25));          // e^25
+System.out.println(Math.pow(3, 5));        // 3^5 = 243
+System.out.println(Math.sqrt(64));          // √64 = 8.0
+System.out.println(Math.cbrt(27));          // ∛27 = 3.0
+
+// Logarithmic
+System.out.println(Math.log(58));          // Natural log (ln)
+System.out.println(Math.log10(58));         // Base-10 log
+```
+
+### 14.4 Rounding Functions
+
+```java
+double value = 58.8;
+
+// Ceiling (round up)
+System.out.println(Math.ceil(58.8));   // 59.0
+System.out.println(Math.ceil(58.1));   // 59.0
+
+// Floor (round down)
+System.out.println(Math.floor(58.8));  // 58.0
+System.out.println(Math.floor(58.1));  // 58.0
+
+// Round to nearest integer
+System.out.println(Math.round(58.8));  // 59 (long)
+System.out.println(Math.round(58.1));  // 58 (long)
+
+// Rint (round to nearest integer, returns double)
+System.out.println(Math.rint(58.8));   // 59.0
+System.out.println(Math.rint(58.1));   // 58.0
+```
+
+### 14.5 Rounding to Specific Decimal Places
+
+```java
+// Round to 2 decimal places
+double value = 2.0/6;  // 0.333333...
+double rounded = Math.round(value * 100) / 100.0;  // 0.33
+
+// Round to 5 decimal places
+double precise = Math.round((2.0/6) * 100000) / 100000.0;  // 0.33333
+```
+
+### 14.6 Min, Max, and Absolute Value
+
+```java
+System.out.println(Math.max(34, 50));        // 50
+System.out.println(Math.min(34, 50));        // 34
+System.out.println(Math.abs(-56));            // 56
+
+// Multiple values (chaining)
+System.out.println(Math.max(3.67, Math.max(1.34, 54.98))); // 54.98
+System.out.println(Math.min(Math.min(2.3, 3.4), 4.5));     // 2.3
+```
+
+### 14.7 Random Number Generation
+
+```java
+// Random double between 0.0 (inclusive) and 1.0 (exclusive)
+double random = Math.random();
+System.out.println(random);  // e.g., 0.723489
+
+// Random integer in range
+int random1to5 = 1 + (int)(Math.random() * 5);  // 1-5
+int random0to10 = (int)(Math.random() * 11);     // 0-10
+
+// Random decimal in range
+double random0to5 = Math.random() * 5;          // 0.0-5.0
+```
+
+### 14.8 Practical Examples
+
+#### Circle Calculations
+```java
+double radius = 3;
+double circumference = 2 * Math.PI * radius;
+```
+
+```java
+String name = fullName("John", "Doe");
+System.out.println(name);
+```
+
+> **NB:** The number of arguments must match the number of parameters in the method definition.
+
+### 11.7 NB (Beginner Notes)
+
+- **Static methods** → belong to the class, no object needed
+- **Instance methods** → belong to objects, require object creation
+- **Return type** → must match the type of value you return
+- **Parameters** → can pass multiple values, but types and order matter
+- Method calls can be nested inside other methods
+
+---
+
+### ✅ Summary
+
+- Methods organize code into reusable blocks
+- Can have parameters and return values
+- Use `static` for class-level methods, instance methods for objects
+- Method overloading allows multiple methods with the same name but different parameters
+
+---
+
+## 12. Arrays and Collections in Java
+
+Java uses arrays and collections to store multiple values in a single variable.
+
+### 12.1 Arrays
+
+**What is an Array?**
+- Fixed-size container for elements of the same type
+- Index starts at 0
+- Can store primitives or objects
+
+#### 12.1.1 Syntax & Declaration
+
+```java
+int[] numbers;          // declare
+numbers = new int[5];   // allocate memory for 5 elements
+
+// Or in one line:
+int[] numbers = new int[5];
+
+// Or initialize directly:
+int[] numbers = {1, 2, 3, 4, 5};
+```
+
+#### 12.1.2 Accessing Array Elements
+
+```java
+System.out.println(numbers[0]);  // prints first element
+numbers[2] = 10;                 // change third element
+```
+
+> **NB:** Accessing an invalid index (e.g., `numbers[5]`) will throw `ArrayIndexOutOfBoundsException`.
+
+#### 12.1.3 Iterating Over Arrays
+
+**Using for loop:**
+```java
+for (int i = 0; i < numbers.length; i++) {
+    System.out.println(numbers[i]);
+}
+```
+
+**Using enhanced for loop (for-each):**
+```java
+for (int num : numbers) {
+    System.out.println(num);
+}
+```
+
+#### 12.1.4 Multi-dimensional Arrays
+
+```java
+int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+
+System.out.println(matrix[1][2]); // prints 6
+```
+
+> **NB:** Arrays are fixed-size. To "resize," you need Collections.
+
+---
+
+### 12.2 Collections (List / ArrayList)
+
+**What is a Collection?**
+- Dynamic-size container
+- Can add, remove, or modify elements
+- Part of `java.util` package
+
+#### 12.2.1 Importing Collection Classes
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+```
+
+#### 12.2.2 ArrayList Example
+
+```java
+ArrayList<String> fruits = new ArrayList<>();
+
+fruits.add("Apple");
+fruits.add("Banana");
+fruits.add("Cherry");
+
+System.out.println(fruits); // [Apple, Banana, Cherry]
+```
+
+#### 12.2.3 Accessing Elements
+
+```java
+System.out.println(fruits.get(0));  // Apple
+fruits.set(1, "Blueberry");         // Replace Banana with Blueberry
+fruits.remove(2);                    // Remove Cherry
+```
+
+#### 12.2.4 Iterating Over ArrayList
+
+**Using for-each loop:**
+```java
+for (String fruit : fruits) {
+    System.out.println(fruit);
+}
+```
+
+**Using standard for loop:**
+```java
+for (int i = 0; i < fruits.size(); i++) {
+    System.out.println(fruits.get(i));
+}
+```
+
+#### 12.2.5 List Interface
+
+```java
+List<String> colors = new ArrayList<>();
+colors.add("Red");
+colors.add("Green");
+colors.add("Blue");
+```
+
+> **NB:** `ArrayList` is one implementation of the `List` interface. Other types exist (`LinkedList`, `Vector`), but `ArrayList` is most commonly used.
+
+---
+
+### 12.3 Arrays vs ArrayList (Quick Comparison)
+
+| Feature | Array | ArrayList |
+|---------|--------|-----------|
+| **Size** | Fixed | Dynamic |
+| **Can store** | Primitives or objects | Objects only |
+| **Access** | `array[index]` | `list.get(index)` |
+| **Add/Remove** | No | Yes (add, remove) |
+| **Iteration** | for or for-each | for, for-each, iterator |
+
+---
+
+### 12.4 NB (Beginner Notes)
+
+- Arrays are faster but less flexible
+- ArrayLists are dynamic but store objects only (wrap primitives with `Integer`, `Double`, etc.)
+- Java does not have tuples; small fixed groups of values can be stored in arrays, ArrayList, or custom classes/records
+- Looping over arrays/ArrayLists works with `for`, `while`, and enhanced for
+
+---
+
+### 12.5 Example Combining Loops and ArrayList
+
+```java
+import java.util.ArrayList;
+
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> students = new ArrayList<>();
+        students.add("Alice");
+        students.add("Bob");
+        students.add("Charlie");
+
+        // Loop through students
+        for (String student : students) {
+            System.out.println("Hello " + student);
+        }
+
+        // Remove a student
+        students.remove("Bob");
+
+        System.out.println("Updated list: " + students);
+    }
+}
+```
+
+**Output:**
+```
+Hello Alice
+Hello Bob
+Hello Charlie
+Updated list: [Alice, Charlie]
+```
+
+---
+
+### ✅ Summary
+
+- **Arrays:** fixed-size, typed, indexed
+- **ArrayLists / Collections:** dynamic-size, flexible, object-based
+- **Loops + Collections:** essential for iterating and modifying lists
+- **No tuples:** use arrays, ArrayLists, or small classes/records for grouped data
 
 ---
 
@@ -1167,7 +1632,7 @@ double amount = principal * Math.pow(1 + rate, years);
 
 ---
 
-## 15. Character Methods in Java
+## 🔤 15. Character Methods in Java
 
 The `Character` class provides utility methods for working with individual characters.
 
@@ -1609,9 +2074,11 @@ input.close();
 
 ---
 
-## 18. Escape Sequences in Java
+### 🧾 18. Escape Sequences in Java
 
 Escape sequences allow you to include special characters in strings.
+
+---
 
 ### 18.1 Common Escape Sequences
 
@@ -1625,6 +2092,8 @@ System.out.println("Hello\bWorld");      // Backspace
 System.out.println("Hello\rWorld");      // Carriage return
 System.out.println("Hello\fWorld");      // Form feed
 ```
+
+---
 
 ### 18.2 Practical Examples
 
@@ -1650,6 +2119,8 @@ String path = "C:\\Users\\Documents\\file.txt";
 String json = "{\"name\":\"John\",\"age\":30}";
 ```
 
+---
+
 ### 18.3 Unicode Escape Sequences
 
 ```java
@@ -1659,6 +2130,8 @@ System.out.println("\u00AE");  //
 System.out.println("\u03A9");  // (Greek Omega)
 System.out.println("\u2660");  // (Spade)
 ```
+
+---
 
 ### 18.4 NB (Beginner Notes)
 
@@ -1670,9 +2143,13 @@ System.out.println("\u2660");  // (Spade)
 
 ---
 
-## 19. Practical Examples and Applications
+##  Practical Examples and Applications
 
-### 19.1 Student Management System
+Let's build some real applications using everything we've learned!
+
+###  19.1 Student Management System
+
+A complete system to manage student records with menu-driven interface.
 
 ```java
 import java.util.Scanner;
@@ -1801,9 +2278,10 @@ public class StudentSystem {
                          topStudent.name, topStudent.gpa);
     }
 }
-```
 
-### 19.2 Bank Account System
+###  19.2 Bank Account System
+
+A simple banking application with account creation and transaction management.
 
 ```java
 import java.util.Scanner;
@@ -1910,9 +2388,10 @@ public class SimpleBank {
         }
     }
 }
-```
 
-### 19.3 Time Conversion Utility
+###  19.3 Time Conversion Utility
+
+Convert seconds into days, hours, minutes, and seconds format.
 
 ```java
 import java.util.Scanner;
@@ -1948,9 +2427,10 @@ public class TimeConverter {
         input.close();
     }
 }
-```
 
-### 19.4 Password Strength Checker
+###  19.4 Password Strength Checker
+
+Analyze password strength based on multiple criteria.
 
 ```java
 import java.util.Scanner;
@@ -2022,14 +2502,43 @@ public class PasswordChecker {
         input.close();
     }
 }
-```
 
-### 19.5 NB (Beginner Notes)
+###  19.5 NB (Beginner Notes)
 
-- Combine multiple concepts in real applications
-- Always validate user input
-- Use appropriate data types for different scenarios
-- Handle exceptions gracefully
-- Format output for better user experience
-- Use meaningful variable names and comments
-- Test your code with different inputs
+- **Combine multiple concepts** in real applications
+- **Always validate** user input
+- **Use appropriate data types** for different scenarios
+- **Handle exceptions gracefully**
+- **Format output** for better user experience
+- **Use meaningful variable names** and comments
+- **Test your code** with different inputs
+
+---
+##  Conclusion
+
+Congratulations! You've now learned the fundamentals of Java programming. This documentation covers:
+
+ Core Concepts: Variables, data types, control flow
+ Object-Oriented: Classes, methods, encapsulation  
+ Data Structures: Arrays, collections, loops
+ Advanced Topics: Exception handling, string manipulation
+ Practical Applications: Real-world examples
+
+###  What's Next?
+
+- **Practice**: Build small projects daily
+- **Explore**: Learn about Java frameworks (Spring, Hibernate)
+- **Advanced Topics**: Generics, lambda expressions, streams
+- **Build**: Create a portfolio of projects
+
+###  Tips for Success
+
+- **Code every day** - consistency builds skills
+- **Read others' code** - learn from experienced developers
+- **Debug systematically** - understand error messages
+- **Join communities** - Stack Overflow, GitHub, local meetups
+
+---
+**Happy Coding! **
+
+*This documentation is a living document. Feel free to contribute suggestions or report issues to make it better for everyone!*
