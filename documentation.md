@@ -944,3 +944,1092 @@ ArrayLists / Collections: dynamic-size, flexible, object-based
 Loops + Collections: essential for iterating and modifying lists
 
 No tuples: use arrays, ArrayLists, or small classes/records for grouped data
+
+---
+
+## 13. Type Casting in Java
+
+Type casting is converting one data type to another. Java supports two types of casting: primitive casting and String parsing.
+
+### 13.1 Primitive Type Casting
+
+#### Widening Casting (Automatic)
+Smaller type → Larger type (no data loss)
+
+```java
+int age = 46;
+double newAge = age;  // Automatic: int to double
+```
+
+#### Narrowing Casting (Manual)
+Larger type → Smaller type (possible data loss)
+
+```java
+double height = 5.879;
+int newHeight = (int)height;  // Manual: double to int
+```
+
+**⚠️ NB**: Narrowing casting truncates decimals (doesn't round)
+
+### 13.2 String to Primitive Conversion
+
+Use wrapper class methods:
+
+```java
+String weight = "89";
+String distance = "23.4657";
+
+int intWeight = Integer.parseInt(weight);
+double doubleDistance = Double.parseDouble(distance);
+```
+
+### 13.3 Complete Example
+
+```java
+public class TypeCasting {
+    public static void main(String[] args) {
+        int age = 46;
+        double height = 5.879;
+        String weight = "89";
+        String distance = "23.4657";
+
+        // Primitive casting
+        double newAge = (double)age;
+        int newHeight = (int)height;
+
+        // String parsing
+        int intWeight = Integer.parseInt(weight);
+        double doubleDistance = Double.parseDouble(distance);
+
+        System.out.printf("Original age (int): %d -> Converted to double: %.1f\n", age, newAge);
+        System.out.printf("Original height (double): %.3f -> Converted to int: %d\n", height, newHeight);
+        System.out.printf("Original weight (String): \"%s\" -> Converted to int: %d\n", weight, intWeight);
+        System.out.printf("Original distance (String): \"%s\" -> Converted to double: %.4f\n", distance, doubleDistance);
+    }
+}
+```
+
+### 13.4 Common Casting Scenarios
+
+#### Arithmetic Operations
+```java
+int result = 5 / 2;        // Result: 2 (integer division)
+double result = 5.0 / 2;   // Result: 2.5 (double division)
+```
+
+#### User Input Conversion
+```java
+Scanner input = new Scanner(System.in);
+String userInput = input.nextLine();
+int number = Integer.parseInt(userInput);
+```
+
+### 13.5 NB (Beginner Notes)
+
+- **Widening**: Automatic, safe (int → double)
+- **Narrowing**: Manual, potential data loss (double → int)
+- **String parsing**: Use `Integer.parseInt()`, `Double.parseDouble()`
+- **Error handling**: String parsing throws `NumberFormatException` for invalid input
+
+---
+
+## 14. Math Functions in Java
+
+Java's `Math` class provides comprehensive mathematical functions and constants.
+
+### 14.1 Math Constants
+
+```java
+System.out.println(Math.PI);   // 3.141592653589793
+System.out.println(Math.E);    // 2.718281828459045
+```
+
+### 14.2 Trigonometric Functions
+
+```java
+// Convert degrees to radians first
+double angle = 90;
+double radians = Math.toRadians(angle);
+
+System.out.println(Math.sin(radians));    // 1.0
+System.out.println(Math.cos(radians));    // 0.0
+System.out.println(Math.tan(Math.toRadians(45))); // 1.0
+
+// Inverse functions
+System.out.println(Math.asin(1.0));        // π/2
+System.out.println(Math.acos(0.0));        // π/2
+System.out.println(Math.atan(1.0));        // π/4
+
+// Convert back to degrees
+System.out.println(Math.toDegrees(Math.PI/2)); // 90.0
+```
+
+### 14.3 Exponential and Logarithmic Functions
+
+```java
+// Exponential
+System.out.println(Math.exp(25));          // e^25
+System.out.println(Math.pow(3, 5));        // 3^5 = 243
+System.out.println(Math.sqrt(64));          // √64 = 8.0
+System.out.println(Math.cbrt(27));          // ∛27 = 3.0
+
+// Logarithmic
+System.out.println(Math.log(58));          // Natural log (ln)
+System.out.println(Math.log10(58));         // Base-10 log
+```
+
+### 14.4 Rounding Functions
+
+```java
+double value = 58.8;
+
+// Ceiling (round up)
+System.out.println(Math.ceil(58.8));   // 59.0
+System.out.println(Math.ceil(58.1));   // 59.0
+
+// Floor (round down)
+System.out.println(Math.floor(58.8));  // 58.0
+System.out.println(Math.floor(58.1));  // 58.0
+
+// Round to nearest integer
+System.out.println(Math.round(58.8));  // 59 (long)
+System.out.println(Math.round(58.1));  // 58 (long)
+
+// Rint (round to nearest integer, returns double)
+System.out.println(Math.rint(58.8));   // 59.0
+System.out.println(Math.rint(58.1));   // 58.0
+```
+
+### 14.5 Rounding to Specific Decimal Places
+
+```java
+// Round to 2 decimal places
+double value = 2.0/6;  // 0.333333...
+double rounded = Math.round(value * 100) / 100.0;  // 0.33
+
+// Round to 5 decimal places
+double precise = Math.round((2.0/6) * 100000) / 100000.0;  // 0.33333
+```
+
+### 14.6 Min, Max, and Absolute Value
+
+```java
+System.out.println(Math.max(34, 50));        // 50
+System.out.println(Math.min(34, 50));        // 34
+System.out.println(Math.abs(-56));            // 56
+
+// Multiple values (chaining)
+System.out.println(Math.max(3.67, Math.max(1.34, 54.98))); // 54.98
+System.out.println(Math.min(Math.min(2.3, 3.4), 4.5));     // 2.3
+```
+
+### 14.7 Random Number Generation
+
+```java
+// Random double between 0.0 (inclusive) and 1.0 (exclusive)
+double random = Math.random();
+System.out.println(random);  // e.g., 0.723489
+
+// Random integer in range
+int random1to5 = 1 + (int)(Math.random() * 5);  // 1-5
+int random0to10 = (int)(Math.random() * 11);     // 0-10
+
+// Random decimal in range
+double random0to5 = Math.random() * 5;          // 0.0-5.0
+```
+
+### 14.8 Practical Examples
+
+#### Circle Calculations
+```java
+double radius = 3;
+double circumference = 2 * Math.PI * radius;
+double area = Math.PI * Math.pow(radius, 2);
+```
+
+#### Financial Calculations
+```java
+double principal = 1000;
+double rate = 0.05;
+int years = 5;
+
+// Compound interest
+double amount = principal * Math.pow(1 + rate, years);
+```
+
+### 14.9 NB (Beginner Notes)
+
+- All `Math` methods are `static` - call directly: `Math.sqrt()`
+- Trigonometric functions use **radians**, not degrees
+- Use `Math.toRadians()` and `Math.toDegrees()` for conversions
+- `Math.random()` returns `double` between 0.0 (inclusive) and 1.0 (exclusive)
+- For integer ranges, multiply and cast to `int`
+
+---
+
+## 15. Character Methods in Java
+
+The `Character` class provides utility methods for working with individual characters.
+
+### 15.1 Character Classification Methods
+
+```java
+char letter = 'B';
+char digit = '2';
+char symbol = '$';
+
+// Check if character is a digit
+System.out.println(Character.isDigit(letter));    // false
+System.out.println(Character.isDigit(digit));     // true
+
+// Check if character is a letter
+System.out.println(Character.isLetter(letter));   // true
+System.out.println(Character.isLetter(digit));    // false
+
+// Check if letter or digit
+System.out.println(Character.isLetterOrDigit(symbol)); // false
+```
+
+### 15.2 Case Checking Methods
+
+```java
+char upper = 'A';
+char lower = 'a';
+char number = '2';
+
+// Upper case check
+System.out.println(Character.isUpperCase(upper));  // true
+System.out.println(Character.isUpperCase(lower));  // false
+System.out.println(Character.isUpperCase(number)); // false
+
+// Lower case check
+System.out.println(Character.isLowerCase(upper));  // false
+System.out.println(Character.isLowerCase(lower));  // true
+System.out.println(Character.isLowerCase(number)); // false
+
+// Title case (rarely used)
+System.out.println(Character.isTitleCase(upper));  // false
+```
+
+### 15.3 Character Conversion Methods
+
+```java
+char lower = 'a';
+char upper = 'A';
+
+// Convert to upper case
+System.out.println(Character.toUpperCase(lower));  // 'A'
+
+// Convert to lower case
+System.out.println(Character.toLowerCase(upper));  // 'a'
+
+// Convert to title case
+System.out.println(Character.toTitleCase('a'));    // 'A'
+```
+
+### 15.4 Character Properties
+
+```java
+// Check if character is whitespace
+System.out.println(Character.isWhitespace(' '));   // true
+System.out.println(Character.isWhitespace('\t'));  // true
+System.out.println(Character.isWhitespace('\n'));  // true
+
+// Check if character is defined in Unicode
+System.out.println(Character.isDefined('A'));      // true
+System.out.println(Character.isDefined('\u03A9'));  // true (Greek Omega)
+
+// Check for specific character types
+System.out.println(Character.isJavaIdentifierStart('A')); // true
+System.out.println(Character.isJavaIdentifierPart('1'));  // true
+```
+
+### 15.5 Character Values and Unicode
+
+```java
+// Get numeric value of character
+System.out.println(Character.getNumericValue('5'));  // 5
+System.out.println(Character.getNumericValue('A'));  // 10 (hexadecimal)
+
+// Get character code point
+System.out.println((int)'A');  // 65
+System.out.println((int)'a');  // 97
+
+// Unicode representation
+System.out.println(Integer.toHexString('A'));  // "41"
+System.out.println("\\u" + Integer.toHexString('A'));  // "\u0041"
+```
+
+### 15.6 Practical Example: Password Strength Checker
+
+```java
+String password = "MyP@ssw0rd123";
+int strength = 0;
+
+// Check for uppercase letters
+for (char c : password.toCharArray()) {
+    if (Character.isUpperCase(c)) {
+        strength++;
+        break;
+    }
+}
+
+// Check for lowercase letters
+for (char c : password.toCharArray()) {
+    if (Character.isLowerCase(c)) {
+        strength++;
+        break;
+    }
+}
+
+// Check for digits
+for (char c : password.toCharArray()) {
+    if (Character.isDigit(c)) {
+        strength++;
+        break;
+    }
+}
+
+// Check for special characters (non-alphanumeric)
+for (char c : password.toCharArray()) {
+    if (!Character.isLetterOrDigit(c)) {
+        strength++;
+        break;
+    }
+}
+```
+
+### 15.7 NB (Beginner Notes)
+
+- `char` is a primitive type, but `Character` is the wrapper class
+- Use `Character` methods for character analysis and manipulation
+- Characters are stored as Unicode values (can cast to `int` to see code)
+- Numbers are neither uppercase nor lowercase
+- Use `toCharArray()` to convert strings to character arrays for iteration
+
+---
+
+## 16. String Methods in Java
+
+Strings are objects with many useful methods for manipulation and analysis.
+
+### 16.1 Basic String Information
+
+```java
+String text = "  Hello World  ";
+
+// Length
+System.out.println(text.length());  // 15 (includes spaces)
+
+// Trim whitespace
+System.out.println(text.trim());    // "Hello World"
+System.out.println(text.trim().length()); // 11
+```
+
+### 16.2 Character Access and Substrings
+
+```java
+String word = "Programming";
+
+// Character at position
+System.out.println(word.charAt(0));     // 'P'
+System.out.println(word.charAt(4));     // 'r'
+
+// Substring
+System.out.println(word.substring(4));      // "ramming"
+System.out.println(word.substring(0, 7));   // "Program"
+System.out.println(word.substring(4, 7));   // "ram"
+```
+
+### 16.3 String Comparison Methods
+
+```java
+String name1 = "Edwin";
+String name2 = "Edwin";
+String name3 = "edwin";
+String name4 = "  Edwin  ";
+
+// Case-sensitive comparison
+System.out.println(name1.equals(name2));           // true
+System.out.println(name1.equals(name3));           // false
+
+// Case-insensitive comparison
+System.out.println(name1.equalsIgnoreCase(name3));  // true
+
+// Compare with trimmed string
+System.out.println(name1.equals(name4.trim()));      // true
+```
+
+### 16.4 String Search Methods
+
+```java
+String sentence = "Java Programming is Fun";
+
+// Check if contains substring
+System.out.println(sentence.contains("Java"));       // true
+System.out.println(sentence.contains("Python"));     // false
+
+// Check prefix and suffix
+System.out.println(sentence.startsWith("Java"));      // true
+System.out.println(sentence.endsWith("Fun"));        // true
+
+// Find position of substring
+System.out.println(sentence.indexOf("Program"));     // 5
+System.out.println(sentence.indexOf("Python"));      // -1 (not found)
+System.out.println(sentence.lastIndexOf("a"));       // 15 (last 'a')
+```
+
+### 16.5 String Manipulation Methods
+
+```java
+String text = "hello world";
+
+// Convert case
+System.out.println(text.toUpperCase());  // "HELLO WORLD"
+System.out.println(text.toLowerCase());  // "hello world"
+
+// Replace characters or substrings
+System.out.println(text.replace('l', 'L'));        // "heLLo worLd"
+System.out.println(text.replace("world", "Java"));  // "hello Java"
+
+// Replace all (regex support)
+System.out.println(text.replaceAll("l", "L"));      // "heLLo worLd"
+System.out.println(text.replaceAll("\\s", "_"));     // "hello_world"
+```
+
+### 16.6 String Splitting and Joining
+
+```java
+String csv = "apple,banana,cherry,date";
+
+// Split into array
+String[] fruits = csv.split(",");
+for (String fruit : fruits) {
+    System.out.println(fruit);
+}
+
+// Join array into string
+String[] words = {"Java", "is", "awesome"};
+String sentence = String.join(" ", words);
+System.out.println(sentence);  // "Java is awesome"
+```
+
+### 16.7 String Formatting
+
+```java
+// Using String.format()
+String name = "Alice";
+int age = 25;
+double gpa = 3.85;
+
+String formatted = String.format("Name: %s, Age: %d, GPA: %.2f", name, age, gpa);
+System.out.println(formatted);
+
+// Padding with spaces
+String padded = String.format("%10s", "Hello");
+System.out.println(padded);  // "     Hello"
+
+// Zero-padding numbers
+String paddedNum = String.format("%05d", 42);
+System.out.println(paddedNum);  // "00042"
+```
+
+### 16.8 String Validation Examples
+
+```java
+// Validate email format
+String email = "user@example.com";
+boolean isValidEmail = email.contains("@") && email.contains(".") && 
+                       email.indexOf("@") < email.lastIndexOf(".");
+
+// Validate phone number (simple)
+String phone = "123-456-7890";
+boolean isValidPhone = phone.length() == 12 && 
+                       phone.charAt(3) == '-' && phone.charAt(7) == '-';
+
+// Check if string is numeric
+String number = "12345";
+boolean isNumeric = number.matches("\\d+");
+```
+
+### 16.9 String Builder for Efficient Manipulation
+
+```java
+// Inefficient: creates many String objects
+String result = "";
+for (int i = 0; i < 1000; i++) {
+    result += i;  // Creates new String each time
+}
+
+// Efficient: uses StringBuilder
+StringBuilder sb = new StringBuilder();
+for (int i = 0; i < 1000; i++) {
+    sb.append(i);
+}
+String efficientResult = sb.toString();
+```
+
+### 16.10 NB (Beginner Notes)
+
+- Strings are **immutable** - methods return new strings, don't modify original
+- Use `equals()` for comparison, not `==` (compares references)
+- `trim()` removes leading and trailing whitespace
+- `substring(beginIndex, endIndex)` - endIndex is exclusive
+- Use `StringBuilder` for frequent string modifications
+- String concatenation with `+` is fine for small numbers of strings
+
+---
+
+## 17. Exception Handling in Java
+
+Exception handling allows your program to handle errors gracefully without crashing.
+
+### 17.1 Basic Try-Catch Structure
+
+```java
+try {
+    // Code that might throw an exception
+    int number = Integer.parseInt("abc");
+} catch (Exception e) {
+    // Handle the exception
+    System.out.println("Error: " + e.getMessage());
+}
+```
+
+### 17.2 Common Exception Types
+
+#### NumberFormatException
+```java
+try {
+    int number = Integer.parseInt("123abc");
+} catch (NumberFormatException e) {
+    System.out.println("Invalid number format");
+}
+```
+
+#### InputMismatchException
+```java
+Scanner input = new Scanner(System.in);
+try {
+    System.out.print("Enter age: ");
+    int age = input.nextInt();
+} catch (java.util.InputMismatchException e) {
+    System.out.println("Please enter a valid integer");
+}
+```
+
+#### ArrayIndexOutOfBoundsException
+```java
+int[] numbers = {1, 2, 3};
+try {
+    System.out.println(numbers[5]);  // Invalid index
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Array index out of bounds");
+}
+```
+
+### 17.3 Multiple Catch Blocks
+
+```java
+try {
+    String input = "123abc";
+    int number = Integer.parseInt(input);
+    int[] array = new int[number];
+} catch (NumberFormatException e) {
+    System.out.println("Invalid number format");
+} catch (NegativeArraySizeException e) {
+    System.out.println("Array size cannot be negative");
+} catch (Exception e) {
+    System.out.println("General error: " + e.getMessage());
+}
+```
+
+### 17.4 Finally Block
+
+```java
+Scanner input = new Scanner(System.in);
+try {
+    System.out.print("Enter number: ");
+    int number = input.nextInt();
+    System.out.println("You entered: " + number);
+} catch (Exception e) {
+    System.out.println("Error: " + e.getMessage());
+} finally {
+    input.close();  // Always executed
+    System.out.println("Scanner closed");
+}
+```
+
+### 17.5 Throwing Exceptions
+
+```java
+public static void setAge(int age) {
+    if (age < 0 || age > 150) {
+        throw new IllegalArgumentException("Age must be between 0 and 150");
+    }
+    // Set age logic here
+}
+```
+
+### 17.6 Practical Example: Robust Input
+
+```java
+Scanner input = new Scanner(System.in);
+int age = 0;
+
+while (true) {
+    try {
+        System.out.print("Enter your age: ");
+        age = input.nextInt();
+        
+        if (age < 0 || age > 150) {
+            System.out.println("Age must be between 0 and 150");
+            continue;
+        }
+        
+        break;  // Valid input, exit loop
+        
+    } catch (java.util.InputMismatchException e) {
+        System.out.println("Please enter a valid integer");
+        input.nextLine();  // Clear invalid input
+    }
+}
+
+System.out.println("Your age is: " + age);
+input.close();
+```
+
+### 17.7 NB (Beginner Notes)
+
+- Use try-catch for code that might fail (user input, file operations, network)
+- Catch specific exceptions when possible, not just `Exception`
+- `finally` block always executes (useful for cleanup)
+- Don't catch exceptions you can't handle properly
+- Use `input.nextLine()` after `nextInt()` to consume newline
+
+---
+
+## 18. Escape Sequences in Java
+
+Escape sequences allow you to include special characters in strings.
+
+### 18.1 Common Escape Sequences
+
+```java
+System.out.println("Hello\tWorld");     // Tab
+System.out.println("Hello\nWorld");     // New line
+System.out.println("Hello\"World\"");    // Double quote
+System.out.println("Hello\'World\'");    // Single quote
+System.out.println("Hello\\World");      // Backslash
+System.out.println("Hello\bWorld");      // Backspace
+System.out.println("Hello\rWorld");      // Carriage return
+System.out.println("Hello\fWorld");      // Form feed
+```
+
+### 18.2 Practical Examples
+
+```java
+// Formatted output with tabs
+System.out.println("Name\t\tAge\tScore");
+System.out.println("Alice\t\t25\t95.5");
+System.out.println("Bob\t\t30\t87.2");
+
+// Multi-line string
+String message = "Dear User,\n" +
+                "\n" +
+                "Thank you for your purchase.\n" +
+                "Total: $100.00\n" +
+                "\n" +
+                "Best regards,\n" +
+                "The Store";
+
+// File paths (Windows)
+String path = "C:\\Users\\Documents\\file.txt";
+
+// JSON strings
+String json = "{\"name\":\"John\",\"age\":30}";
+```
+
+### 18.3 Unicode Escape Sequences
+
+```java
+// Unicode characters
+System.out.println("\u00A9");  // 
+System.out.println("\u00AE");  // 
+System.out.println("\u03A9");  // (Greek Omega)
+System.out.println("\u2660");  // (Spade)
+```
+
+### 18.4 NB (Beginner Notes)
+
+- Escape sequences start with backslash `\`
+- Use `\"` for double quotes inside strings
+- Use `\\` for actual backslash character
+- `\n` for new line, `\t` for tab
+- Unicode: `\uXXXX` where XXXX is 4-digit hex code
+
+---
+
+## 19. Practical Examples and Applications
+
+### 19.1 Student Management System
+
+```java
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class Student {
+    String name;
+    int age;
+    double gpa;
+    
+    Student(String name, int age, double gpa) {
+        this.name = name;
+        this.age = age;
+        this.gpa = gpa;
+    }
+    
+    String getGrade() {
+        return (gpa >= 3.7) ? "A" :
+               (gpa >= 3.3) ? "B+" :
+               (gpa >= 3.0) ? "B" : "C";
+    }
+}
+
+public class StudentSystem {
+    static ArrayList<Student> students = new ArrayList<>();
+    
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        while (true) {
+            System.out.println("\n=== Student Management ===");
+            System.out.println("1. Add Student");
+            System.out.println("2. View Students");
+            System.out.println("3. Calculate Statistics");
+            System.out.println("4. Exit");
+            System.out.print("Choice: ");
+            
+            try {
+                int choice = input.nextInt();
+                input.nextLine();  // Consume newline
+                
+                switch (choice) {
+                    case 1: addStudent(input); break;
+                    case 2: viewStudents(); break;
+                    case 3: calculateStatistics(); break;
+                    case 4: System.exit(0);
+                    default: System.out.println("Invalid choice");
+                }
+            } catch (Exception e) {
+                System.out.println("Please enter a valid number");
+                input.nextLine();  // Clear invalid input
+            }
+        }
+    }
+    
+    static void addStudent(Scanner input) {
+        try {
+            System.out.print("Name: ");
+            String name = input.nextLine();
+            
+            System.out.print("Age: ");
+            int age = input.nextInt();
+            
+            System.out.print("GPA: ");
+            double gpa = input.nextDouble();
+            
+            if (age < 16 || age > 100) {
+                System.out.println("Age must be between 16 and 100");
+                return;
+            }
+            
+            if (gpa < 0.0 || gpa > 4.0) {
+                System.out.println("GPA must be between 0.0 and 4.0");
+                return;
+            }
+            
+            students.add(new Student(name, age, gpa));
+            System.out.println("Student added successfully!");
+            
+        } catch (Exception e) {
+            System.out.println("Invalid input format");
+            input.nextLine();  // Clear buffer
+        }
+    }
+    
+    static void viewStudents() {
+        if (students.isEmpty()) {
+            System.out.println("No students found");
+            return;
+        }
+        
+        System.out.println("\n=== Student List ===");
+        System.out.printf("%-20s %-5s %-5s %s\n", "Name", "Age", "GPA", "Grade");
+        System.out.println("----------------------------------------");
+        
+        for (Student s : students) {
+            System.out.printf("%-20s %-5d %-5.1f %s\n", 
+                             s.name, s.age, s.gpa, s.getGrade());
+        }
+    }
+    
+    static void calculateStatistics() {
+        if (students.isEmpty()) {
+            System.out.println("No students found");
+            return;
+        }
+        
+        double totalGpa = 0;
+        double maxGpa = 0;
+        Student topStudent = null;
+        
+        for (Student s : students) {
+            totalGpa += s.gpa;
+            if (s.gpa > maxGpa) {
+                maxGpa = s.gpa;
+                topStudent = s;
+            }
+        }
+        
+        double averageGpa = totalGpa / students.size();
+        
+        System.out.println("\n=== Statistics ===");
+        System.out.printf("Total Students: %d\n", students.size());
+        System.out.printf("Average GPA: %.2f\n", averageGpa);
+        System.out.printf("Top Student: %s (%.1f)\n", 
+                         topStudent.name, topStudent.gpa);
+    }
+}
+```
+
+### 19.2 Bank Account System
+
+```java
+import java.util.Scanner;
+
+public class SimpleBank {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        String accountName = "";
+        double balance = 0.0;
+        String password = "";
+        boolean accountCreated = false;
+        
+        while (true) {
+            System.out.println("\n=== SIMPLE BANK ===");
+            
+            if (!accountCreated) {
+                System.out.println("1. Create Account");
+                System.out.println("2. Exit");
+            } else {
+                System.out.println("Account: " + accountName);
+                System.out.printf("Balance: $%.2f\n", balance);
+                System.out.println("1. Deposit");
+                System.out.println("2. Withdraw");
+                System.out.println("3. Check Balance");
+                System.out.println("4. Exit");
+            }
+            
+            System.out.print("Choice: ");
+            int choice = input.nextInt();
+            
+            if (!accountCreated) {
+                switch (choice) {
+                    case 1:
+                        input.nextLine();  // Clear buffer
+                        System.out.print("Enter name: ");
+                        accountName = input.nextLine().trim();
+                        
+                        if (accountName.length() < 2) {
+                            System.out.println("Name too short!");
+                            break;
+                        }
+                        
+                        // Capitalize first letter
+                        accountName = accountName.substring(0, 1).toUpperCase() + 
+                                     accountName.substring(1).toLowerCase();
+                        
+                        System.out.print("Set password: ");
+                        password = input.nextLine();
+                        
+                        System.out.print("Initial deposit: ");
+                        balance = input.nextDouble();
+                        
+                        if (balance < 0) {
+                            System.out.println("Invalid amount! Setting to $0");
+                            balance = 0.0;
+                        }
+                        
+                        accountCreated = true;
+                        System.out.println("Account created!");
+                        break;
+                        
+                    case 2:
+                        System.out.println("Goodbye!");
+                        System.exit(0);
+                }
+            } else {
+                switch (choice) {
+                    case 1: // Deposit
+                        System.out.print("Deposit amount: ");
+                        double deposit = input.nextDouble();
+                        if (deposit > 0) {
+                            balance += deposit;
+                            System.out.printf("Deposited: $%.2f\n", deposit);
+                            System.out.printf("New balance: $%.2f\n", balance);
+                        } else {
+                            System.out.println("Invalid amount!");
+                        }
+                        break;
+                        
+                    case 2: // Withdraw
+                        System.out.print("Withdrawal amount: ");
+                        double withdraw = input.nextDouble();
+                        if (withdraw > 0 && withdraw <= balance) {
+                            balance -= withdraw;
+                            System.out.printf("Withdrew: $%.2f\n", withdraw);
+                            System.out.printf("New balance: $%.2f\n", balance);
+                        } else if (withdraw > balance) {
+                            System.out.println("Insufficient funds!");
+                        } else {
+                            System.out.println("Invalid amount!");
+                        }
+                        break;
+                        
+                    case 3: // Check Balance
+                        System.out.printf("Current balance: $%.2f\n", balance);
+                        break;
+                        
+                    case 4: // Exit
+                        System.out.println("Thank you for banking!");
+                        System.exit(0);
+                }
+            }
+        }
+    }
+}
+```
+
+### 19.3 Time Conversion Utility
+
+```java
+import java.util.Scanner;
+
+public class TimeConverter {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.print("Enter time in seconds: ");
+        try {
+            int totalSeconds = input.nextInt();
+            
+            if (totalSeconds < 0) {
+                System.out.println("Time cannot be negative");
+                return;
+            }
+            
+            // Calculate time components
+            int days = totalSeconds / 86400;
+            int remainingSeconds = totalSeconds % 86400;
+            int hours = remainingSeconds / 3600;
+            remainingSeconds %= 3600;
+            int minutes = remainingSeconds / 60;
+            int seconds = remainingSeconds % 60;
+            
+            System.out.printf("Time: %d days, %d hours, %d minutes, %d seconds\n",
+                             days, hours, minutes, seconds);
+            
+        } catch (Exception e) {
+            System.out.println("Please enter a valid integer");
+        }
+        
+        input.close();
+    }
+}
+```
+
+### 19.4 Password Strength Checker
+
+```java
+import java.util.Scanner;
+
+public class PasswordChecker {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.print("Enter password to check: ");
+        String password = input.nextLine();
+        
+        int strength = 0;
+        
+        // Length check
+        if (password.length() >= 8) strength++;
+        
+        // Check for digit
+        boolean hasDigit = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                hasDigit = true;
+                break;
+            }
+        }
+        if (hasDigit) strength++;
+        
+        // Check for uppercase
+        boolean hasUpper = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpper = true;
+                break;
+            }
+        }
+        if (hasUpper) strength++;
+        
+        // Check for lowercase
+        boolean hasLower = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isLowerCase(c)) {
+                hasLower = true;
+                break;
+            }
+        }
+        if (hasLower) strength++;
+        
+        // Check for special character
+        boolean hasSpecial = false;
+        for (char c : password.toCharArray()) {
+            if (!Character.isLetterOrDigit(c)) {
+                hasSpecial = true;
+                break;
+            }
+        }
+        if (hasSpecial) strength++;
+        
+        // Display result
+        String strengthText = switch (strength) {
+            case 5 -> "Very Strong";
+            case 4 -> "Strong";
+            case 3 -> "Medium";
+            case 2 -> "Weak";
+            default -> "Very Weak";
+        };
+        
+        System.out.println("Password strength: " + strengthText);
+        System.out.println("Score: " + strength + "/5");
+        
+        input.close();
+    }
+}
+```
+
+### 19.5 NB (Beginner Notes)
+
+- Combine multiple concepts in real applications
+- Always validate user input
+- Use appropriate data types for different scenarios
+- Handle exceptions gracefully
+- Format output for better user experience
+- Use meaningful variable names and comments
+- Test your code with different inputs
